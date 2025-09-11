@@ -1,0 +1,14 @@
+{
+  "name": "Audio Visualizer",
+  "short_name": "AV",
+  "display": "standalone",
+  "background_color": "#23265f",
+  "theme_color": "#23265f",
+  "icons": [
+    {
+      "src": "assets/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
