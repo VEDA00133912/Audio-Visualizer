@@ -10,7 +10,8 @@
   <meta name="robots" content="index, follow">
   <link rel="icon" href="./assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="./assets/favicon.png" type="image/png">
-    
+  <link rel="manifest" href="manifest.json">
+
   <meta property="og:title" content="Audio Visualizer">
   <meta property="og:description" content="ブラウザで動作するAudio Visualizer">
   <meta property="og:type" content="website">
@@ -39,20 +40,41 @@
     <button id="play" class="secondary">▶️</button>
     <button id="stop" class="secondary">⏹️</button>
 
-    <div style="display:flex;gap:8px;align-items:center">
-      <label style="font-size:13px;color:var(--muted)">音量</label>
-      <input id="vol" type="range" min="0" max="1" step="0.01" value="0.9">
-    </div>
+    <button id="settingsBtn" style="margin-top:8px;" class="settingBtn">詳細設定</button>
+    
+    <div id="settingsModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+    
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+          <label style="font-size:13px;color:var(--muted)">音　量</label>
+          <input id="vol" type="range" min="0" max="2" step="0.01" value="0.9">
+          <span id="volValue">1.00倍</span>
+        </div>
+    
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+          <label style="font-size:13px;color:var(--muted)">速　度</label>
+          <input id="speed" type="range" min="0.5" max="2" step="0.01" value="1">
+          <span id="speedValue">1.00x</span>
+        </div>
+          
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+          <label style="font-size:13px;color:var(--muted)">バー数</label>
+          <input id="bars" type="range" min="16" max="256" step="1" value="150">
+          <span id="barsValue">150.00本</span>
+        </div>
 
-    <div style="display:flex;gap:8px;align-items:center">
-      <label style="font-size:13px;color:var(--muted)">バー数</label>
-      <input id="bars" type="range" min="16" max="256" step="1" value="150">
+        <div style="margin-top:12px; text-align:right;">
+          <button id="resetSettings" class="secondary">初期化</button>
+        </div>
+              
+      </div>
     </div>
   </div>
 
   <div class="canvas-wrap" style="height:auto;">
-    <canvas id="visualCanvas" style="height:120px;"></canvas>
-    <canvas id="waveCanvas" style="height:120px;margin-top:8px;"></canvas>
+    <canvas id="visualCanvas" style="height:120px;">bars canvas</canvas>
+    <canvas id="waveCanvas" style="height:120px;margin-top:8px;">wave canvas</canvas>
   </div>
 
   <div class="progress">
@@ -62,8 +84,9 @@
   <div class="meta">
     <div id="trackInfo" class="track">--</div>
     <div class="meta-row">
-      <div id="offsetInfo">OFFSET: 0.00s</div>
       <div id="timeInfo">00:00 / 00:00</div>
+      <div id="offsetInfo">OFFSET: 0.00s</div>
+      <div id="typeInfo">TYPE: --</div>
     </div>
   </div>
 
@@ -76,9 +99,6 @@
   <p>&copy; <span id="year"></span> ryo001339 All rights reserved.</p>
 </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 <script src="script.js"></script>
 </body>
 </html>
